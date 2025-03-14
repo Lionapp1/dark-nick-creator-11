@@ -31,7 +31,7 @@
 
     --border: 230 15% 18%;
     --input: 230 15% 18%;
-    --ring: 210 100% 64%;
+    --ring: 210 100% 65%;
 
     --radius: 0.75rem;
   }
@@ -49,6 +49,8 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    background-image: radial-gradient(circle at 15% 50%, rgba(78, 172, 255, 0.08) 0%, transparent 25%),
+                       radial-gradient(circle at 85% 30%, rgba(137, 100, 240, 0.08) 0%, transparent 25%);
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -67,11 +69,19 @@
   }
   
   .gaming-card {
-    @apply bg-dark-surface-2 rounded-xl border border-white/5 backdrop-blur-sm hover:border-gaming-blue/30 transition-all duration-300;
+    @apply bg-dark-surface-2 rounded-xl border border-white/5 backdrop-blur-sm hover:border-gaming-blue/30 transition-all duration-300 shadow-lg shadow-black/20;
   }
   
   .gaming-gradient-text {
     @apply text-transparent bg-clip-text bg-gaming-gradient;
+  }
+  
+  .gaming-gradient-text-2 {
+    @apply text-transparent bg-clip-text bg-gaming-gradient-2;
+  }
+  
+  .gaming-gradient-text-3 {
+    @apply text-transparent bg-clip-text bg-gaming-gradient-3;
   }
   
   .section-animate {

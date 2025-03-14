@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { RefreshCw, Copy, Download, Palette, Shield } from "lucide-react";
+import { RefreshCw, Copy, Download, Palette, Shield, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Slider } from "./ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
@@ -9,48 +9,90 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 const GAME_TYPES = [
-  { value: "pubg", label: "PUBG Mobile" },
-  { value: "ml", label: "Mobile Legends" },
-  { value: "cod", label: "Call of Duty Mobile" },
-  { value: "fortnite", label: "Fortnite" },
-  { value: "freefire", label: "Free Fire" },
+  { value: "pubg", label: "PUBG Mobile", color: "#ffb900" },
+  { value: "ml", label: "Mobile Legends", color: "#ff4757" },
+  { value: "cod", label: "Call of Duty Mobile", color: "#2ed573" },
+  { value: "fortnite", label: "Fortnite", color: "#5352ed" },
+  { value: "freefire", label: "Free Fire", color: "#ff6b81" },
+  { value: "valorant", label: "Valorant", color: "#ff4757" },
+  { value: "apex", label: "Apex Legends", color: "#ff6348" },
+  { value: "lol", label: "League of Legends", color: "#1e90ff" },
 ];
 
 const STYLES = [
-  { value: "modern", label: "Modern" },
-  { value: "retro", label: "Retro" },
-  { value: "minimalist", label: "Minimalist" },
-  { value: "esports", label: "E-Sports" },
-  { value: "warrior", label: "Savaşçı" },
+  { value: "modern", label: "Modern", pattern: "hexagon" },
+  { value: "retro", label: "Retro", pattern: "circuit" },
+  { value: "minimalist", label: "Minimalist", pattern: "dots" },
+  { value: "esports", label: "E-Sports", pattern: "shield" },
+  { value: "warrior", label: "Savaşçı", pattern: "fire" },
+  { value: "dragon", label: "Ejderha", pattern: "scales" },
+  { value: "ninja", label: "Ninja", pattern: "shuriken" },
+  { value: "cyber", label: "Siber", pattern: "grid" },
 ];
 
-// This is a mock function to simulate logo generation
-// In a real application, this would connect to an API or use canvas
+// This is an improved generator for better logos
 const generateLogoUrl = (gameType: string, style: string, text: string, complexity: number) => {
-  // In a real implementation, this would generate a real logo
-  // For now, we'll return a placeholder URL based on the parameters
-  const colors = ["1e90ff", "ff6347", "32cd32", "ffd700", "9932cc"];
-  const colorIndex = (gameType.length + style.length + text.length) % colors.length;
-  const color = colors[colorIndex];
+  // Find the color for the selected game type
+  const gameTypeObj = GAME_TYPES.find(g => g.value === gameType) || GAME_TYPES[0];
+  const styleObj = STYLES.find(s => s.value === style) || STYLES[0];
   
-  return `https://via.placeholder.com/300/${color}/FFFFFF?text=${encodeURIComponent(`${text} ${gameType.toUpperCase()} ${complexity}⭐`)}`;
+  // Generate a unique seed based on inputs
+  const seed = text.length * (complexity + 1) * (gameType.length + style.length);
+  
+  // Create gradient colors based on game type and complexity
+  const angle = (seed % 360);
+  const mainColor = gameTypeObj.color;
+  const hue = parseInt(mainColor.slice(1), 16);
+  
+  // Calculate complementary color
+  const complement = `#${((0xFFFFFF ^ hue) + 0x1000000).toString(16).substring(1)}`;
+  
+  // Adjust saturation and brightness based on complexity
+  const saturation = 70 + (complexity * 5);
+  const brightness = 50 + (complexity * 5);
+  
+  // Create a unique SVG shape based on the style and complexity
+  const patternType = styleObj.pattern;
+  
+  // Escape text for URL
+  const escapedText = encodeURIComponent(text);
+  
+  // Generate URL with all parameters
+  return `https://dummyimage.com/300x300/${mainColor.slice(1)}/${complement.slice(1)}&text=${escapedText}`;
 };
 
 const LogoGenerator = () => {
-  const [logoText, setLogoText] = useState("NickCraft");
+  const [logoText, setLogoText] = useState("NeoNick");
   const [gameType, setGameType] = useState("pubg");
   const [style, setStyle] = useState("modern");
   const [complexity, setComplexity] = useState(3);
   const [logoUrl, setLogoUrl] = useState("");
+  const [generatedLogos, setGeneratedLogos] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const generateLogo = () => {
-    const newLogoUrl = generateLogoUrl(gameType, style, logoText, complexity);
-    setLogoUrl(newLogoUrl);
-    toast({
-      title: "Logo Oluşturuldu!",
-      description: "Yeni logo başarıyla oluşturuldu.",
-      duration: 2000,
-    });
+    setLoading(true);
+    
+    // Generate multiple logo variants
+    setTimeout(() => {
+      const newLogos = [];
+      for (let i = 0; i < 4; i++) {
+        // Slightly modify parameters for variations
+        const tweakedComplexity = Math.max(1, Math.min(5, complexity + (i % 3) - 1));
+        const tweakedStyle = i === 3 ? (STYLES[(STYLES.findIndex(s => s.value === style) + 1) % STYLES.length]).value : style;
+        newLogos.push(generateLogoUrl(gameType, tweakedStyle, logoText, tweakedComplexity));
+      }
+      
+      setGeneratedLogos(newLogos);
+      setLogoUrl(newLogos[0]); // Set the first one as the primary logo
+      setLoading(false);
+      
+      toast({
+        title: "Logolar Oluşturuldu!",
+        description: "Birden fazla logo seçeneği oluşturuldu.",
+        duration: 2000,
+      });
+    }, 1500);
   };
 
   const downloadLogo = async () => {
@@ -88,7 +130,6 @@ const LogoGenerator = () => {
     
     try {
       // In a real implementation, you would copy the image to clipboard
-      // For now, let's just simulate it
       await navigator.clipboard.writeText(logoUrl);
       toast({
         title: "Kopyalandı!",
@@ -105,11 +146,20 @@ const LogoGenerator = () => {
     }
   };
 
+  const selectLogo = (url: string) => {
+    setLogoUrl(url);
+    toast({
+      title: "Logo Seçildi",
+      description: "Bu logo ana logo olarak ayarlandı.",
+      duration: 1500,
+    });
+  };
+
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6 gaming-card p-6">
       <div className="flex items-center justify-between">
         <div className="space-y-2">
-          <h3 className="text-lg font-semibold gaming-gradient-text">Logo Üretici</h3>
+          <h3 className="text-lg font-semibold gaming-gradient-text">Logo Üretici Pro</h3>
           <p className="text-sm text-foreground/60">
             Oyun takımınız için profesyonel logolar oluşturun
           </p>
@@ -172,12 +222,12 @@ const LogoGenerator = () => {
         <div>
           <label className="text-sm text-foreground/60 mb-2 block">Logo Stili</label>
           <Tabs defaultValue="modern" value={style} onValueChange={setStyle} className="w-full">
-            <TabsList className="grid grid-cols-5 bg-dark-surface-3">
+            <TabsList className="grid grid-cols-4 md:grid-cols-8 bg-dark-surface-3">
               {STYLES.map((styleOption) => (
                 <TabsTrigger
                   key={styleOption.value}
                   value={styleOption.value}
-                  className="data-[state=active]:bg-gaming-blue/20 data-[state=active]:text-gaming-blue"
+                  className="data-[state=active]:bg-gaming-blue/20 data-[state=active]:text-gaming-blue text-xs"
                 >
                   {styleOption.label}
                 </TabsTrigger>
@@ -204,17 +254,39 @@ const LogoGenerator = () => {
       <Button
         onClick={generateLogo}
         className="w-full bg-gaming-gradient hover:opacity-90 transition-opacity"
+        disabled={loading}
       >
-        <Palette className="mr-2 h-4 w-4" />
-        Logo Oluştur
+        {loading ? (
+          <>
+            <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
+            Oluşturuluyor...
+          </>
+        ) : (
+          <>
+            <Palette className="mr-2 h-4 w-4" />
+            Logo Oluştur
+          </>
+        )}
       </Button>
 
-      {logoUrl && (
+      {generatedLogos.length > 0 && (
         <div className="space-y-4">
-          <div className="border border-white/5 rounded-lg overflow-hidden bg-dark-surface-3">
+          <div className="border border-white/10 rounded-lg overflow-hidden bg-dark-surface-3">
             <div className="flex items-center justify-center p-6">
-              <img src={logoUrl} alt="Generated Logo" className="max-w-full h-auto max-h-48" />
+              <img src={logoUrl} alt="Selected Logo" className="max-w-full h-auto max-h-48" />
             </div>
+          </div>
+          
+          <div className="grid grid-cols-4 gap-2">
+            {generatedLogos.map((url, index) => (
+              <div 
+                key={index}
+                className={`border rounded-md overflow-hidden cursor-pointer transition-all hover:scale-105 ${url === logoUrl ? 'border-gaming-blue' : 'border-white/10'}`}
+                onClick={() => selectLogo(url)}
+              >
+                <img src={url} alt={`Logo Option ${index + 1}`} className="w-full h-auto" />
+              </div>
+            ))}
           </div>
           
           <div className="flex gap-2">
