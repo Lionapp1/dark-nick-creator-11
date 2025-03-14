@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { RefreshCw, Copy, Download, Palette, Shield, Sparkles, Camera } from "lucide-react";
 import { Button } from "./ui/button";
@@ -304,9 +303,13 @@ const LogoGenerator = () => {
 
       {generatedLogos.length > 0 && (
         <div className="space-y-4">
-          <div className="border border-white/10 rounded-lg overflow-hidden bg-dark-surface-3">
+          <div className="border border-white/10 rounded-lg overflow-hidden bg-dark-surface-3 transition-all duration-500 hover:shadow-[0_0_15px_rgba(78,172,255,0.5)]">
             <div className="flex items-center justify-center p-6">
-              <img src={logoUrl} alt="Selected Logo" className="max-w-full h-auto max-h-48" />
+              <img 
+                src={logoUrl} 
+                alt="Selected Logo" 
+                className="max-w-full h-auto max-h-48 transition-all duration-300 hover:scale-105" 
+              />
             </div>
           </div>
           
@@ -314,7 +317,7 @@ const LogoGenerator = () => {
             {generatedLogos.map((url, index) => (
               <div 
                 key={index}
-                className={`border rounded-md overflow-hidden cursor-pointer transition-all hover:scale-105 ${url === logoUrl ? 'border-gaming-blue' : 'border-white/10'}`}
+                className={`border rounded-md overflow-hidden cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_10px_rgba(78,172,255,0.3)] ${url === logoUrl ? 'border-gaming-blue shadow-[0_0_8px_rgba(78,172,255,0.4)]' : 'border-white/10'}`}
                 onClick={() => selectLogo(url)}
               >
                 <img src={url} alt={`Logo Option ${index + 1}`} className="w-full h-auto" />
@@ -326,7 +329,7 @@ const LogoGenerator = () => {
             <Button
               variant="outline"
               onClick={copyToClipboard}
-              className="flex-1"
+              className="flex-1 hover:bg-gaming-blue/10 transition-colors duration-300"
             >
               <Copy className="mr-2 h-4 w-4" />
               Kopyala
@@ -334,7 +337,7 @@ const LogoGenerator = () => {
             <Button
               variant="outline"
               onClick={downloadLogo}
-              className="flex-1"
+              className="flex-1 hover:bg-gaming-blue/10 transition-colors duration-300"
             >
               <Download className="mr-2 h-4 w-4" />
               İndir
