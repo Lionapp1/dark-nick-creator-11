@@ -1,12 +1,36 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import NicknameGenerator from "@/components/NicknameGenerator";
+import TextStyler from "@/components/TextStyler";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col bg-dark-surface">
+      <Header />
+      
+      <main className="flex-1 container py-20">
+        <div className="space-y-16 mt-8">
+          <section className="text-center space-y-4 section-animate">
+            <h1 className="text-4xl md:text-5xl font-bold gaming-gradient-text">
+              Oyuncu Nickinizi Özelleştirin
+            </h1>
+            <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
+              Benzersiz nickler oluşturun ve metinlerinizi şekillendirin
+            </p>
+          </section>
+
+          <section className="space-y-12 section-animate section-animate-delay-1">
+            <NicknameGenerator />
+          </section>
+
+          <section className="space-y-12 section-animate section-animate-delay-2">
+            <TextStyler />
+          </section>
+        </div>
+      </main>
+
+      <Footer />
     </div>
   );
 };
