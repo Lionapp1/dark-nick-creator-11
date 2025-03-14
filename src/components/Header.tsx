@@ -48,17 +48,6 @@ const Header = () => {
               Logo Oluşturucu
             </Button>
           </Link>
-          <Link to="/emojis">
-            <Button 
-              variant="ghost" 
-              className={path === "/emojis" 
-                ? "text-gaming-blue bg-dark-surface-3/50" 
-                : "text-foreground/60 hover:text-foreground hover:bg-dark-surface-3/30"
-              }
-            >
-              Emojiler
-            </Button>
-          </Link>
         </nav>
         
         <div className="md:flex items-center gap-4 hidden">
@@ -111,13 +100,10 @@ const Header = () => {
               >
                 Logo Oluşturucu
               </Link>
-              <Link 
-                to="/emojis" 
-                className={`px-4 py-2 rounded-lg ${path === "/emojis" ? "bg-dark-surface-3/50 text-gaming-blue" : "hover:bg-dark-surface-3/30"}`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Emojiler
-              </Link>
+              <div className="flex items-center gap-2 px-4 py-2 text-xs text-foreground/60">
+                <Shield className="h-3 w-3 text-gaming-cyan" />
+                <span>Uçtan uca şifreli & güvenli</span>
+              </div>
             </div>
           </div>
         )}
