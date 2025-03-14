@@ -2,23 +2,43 @@
 import { Command, Shield } from "lucide-react";
 import { Button } from "./ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  // Get current path to determine active tab
+  const path = window.location.pathname;
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-dark-surface/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <Command className="w-6 h-6 text-gaming-blue" />
           <span className="text-xl font-bold gaming-gradient-text">NickCraft</span>
-        </div>
+        </Link>
         
         <nav className="hidden md:flex items-center gap-6">
-          <Button variant="ghost" className="text-foreground/60 hover:text-foreground">
-            Nick Üretici
-          </Button>
-          <Button variant="ghost" className="text-foreground/60 hover:text-foreground">
-            Metin Dönüştürücü
-          </Button>
+          <Link to="/nicknames">
+            <Button 
+              variant="ghost" 
+              className={path === "/nicknames" 
+                ? "text-gaming-blue" 
+                : "text-foreground/60 hover:text-foreground"
+              }
+            >
+              Nick Üretici
+            </Button>
+          </Link>
+          <Link to="/logos">
+            <Button 
+              variant="ghost" 
+              className={path === "/logos" 
+                ? "text-gaming-blue" 
+                : "text-foreground/60 hover:text-foreground"
+              }
+            >
+              Logo Oluşturucu
+            </Button>
+          </Link>
         </nav>
         
         <Tooltip>
