@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NicknameGenerator from "@/components/NicknameGenerator";
 import TextStyler from "@/components/TextStyler";
+import { Shield } from "lucide-react";
 
 const Index = () => {
   return (
@@ -18,6 +19,10 @@ const Index = () => {
             <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
               Benzersiz nickler oluşturun ve metinlerinizi şekillendirin
             </p>
+            <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-dark-surface-3 border border-white/5 text-sm">
+              <Shield className="h-4 w-4 mr-2 text-gaming-blue" />
+              <span>Uçtan uca şifreli, güvenli ve özel</span>
+            </div>
           </section>
 
           <section className="space-y-12 section-animate section-animate-delay-1">

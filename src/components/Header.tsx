@@ -1,6 +1,7 @@
 
-import { Command } from "lucide-react";
+import { Command, Shield } from "lucide-react";
 import { Button } from "./ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 
 const Header = () => {
   return (
@@ -10,6 +11,7 @@ const Header = () => {
           <Command className="w-6 h-6 text-gaming-blue" />
           <span className="text-xl font-bold gaming-gradient-text">NickCraft</span>
         </div>
+        
         <nav className="hidden md:flex items-center gap-6">
           <Button variant="ghost" className="text-foreground/60 hover:text-foreground">
             Nick Üretici
@@ -18,6 +20,18 @@ const Header = () => {
             Metin Dönüştürücü
           </Button>
         </nav>
+        
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="flex items-center gap-1 text-xs text-foreground/60 border border-white/5 px-2 py-1 rounded-full">
+              <Shield className="h-3 w-3 text-green-500" />
+              <span className="hidden sm:inline">Güvenli</span>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p className="text-xs">Tüm veriler uçtan uca şifrelidir</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </header>
   );
