@@ -1,6 +1,6 @@
 
 import { Link, useLocation } from "react-router-dom";
-import { Command, Type, Palette } from "lucide-react";
+import { Command, Type, Smile } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
@@ -70,10 +70,10 @@ const BottomNavigation = () => {
           active={path === "/nicknames"}
         />
         <NavItem
-          icon={<Palette className="w-5 h-5" />}
-          label="Logolar"
-          to="/logos"
-          active={path === "/logos"}
+          icon={<Smile className="w-5 h-5" />}
+          label="Emojiler"
+          to="/emojis"
+          active={path === "/emojis"}
         />
       </div>
     </div>

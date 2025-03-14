@@ -20,7 +20,7 @@ const Index = () => {
               Oyuncu Kimliğinizi Oluşturun
             </h1>
             <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
-              Benzersiz nickler ve profesyonel oyun logoları ile diğer oyunculardan ayrılın
+              Benzersiz nickler ve emojiler ile diğer oyunculardan ayrılın
             </p>
             <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-dark-surface-3 border border-white/5 text-sm">
               <Shield className="h-4 w-4 mr-2 text-gaming-blue" />
@@ -42,13 +42,13 @@ const Index = () => {
             </div>
             
             <div className="bg-dark-surface-3 rounded-xl p-6 border border-white/5 hover:border-gaming-blue/30 transition-colors">
-              <h2 className="text-2xl font-bold gaming-gradient-text mb-4">Oyun Logoları</h2>
+              <h2 className="text-2xl font-bold gaming-gradient-text mb-4">Emojiler</h2>
               <p className="text-foreground/60 mb-6">
-                Takımınız veya oyuncu profiliniz için profesyonel görünümlü logolar tasarlayın.
+                Sosyal medya ve oyunlarda kullanabileceğiniz iOS emojilerini tek tıkla kopyalayın.
               </p>
-              <Link to="/logos">
+              <Link to="/emojis">
                 <Button className="w-full bg-gaming-gradient hover:opacity-90 transition-opacity">
-                  Logo Oluştur
+                  Emojileri Görüntüle
                 </Button>
               </Link>
             </div>
@@ -66,8 +66,8 @@ const Index = () => {
                 <p className="text-sm text-foreground/60">Benzersiz oyun nickleri üretin</p>
               </div>
               <div className="bg-dark-surface-3 p-4 rounded-lg border border-white/5">
-                <h3 className="font-semibold">Logo Tasarımcı</h3>
-                <p className="text-sm text-foreground/60">Profesyonel oyun logoları tasarlayın</p>
+                <h3 className="font-semibold">Emoji Koleksiyonu</h3>
+                <p className="text-sm text-foreground/60">iOS emojilerini kopyalayıp kullanın</p>
               </div>
             </div>
           </section>

@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import Nicknames from "./pages/Nicknames";
-import Logos from "./pages/Logos";
+import Emojis from "./pages/Emojis";
 import NotFound from "./pages/NotFound";
 
 // Set favicon dynamically
@@ -36,8 +36,8 @@ const RouteChangeHandler = () => {
     
     if (path === "/nicknames") {
       pageTitle = "Nick Üretici - NeoNick Pro";
-    } else if (path === "/logos") {
-      pageTitle = "Logo Oluşturucu - NeoNick Pro";
+    } else if (path === "/emojis") {
+      pageTitle = "Emoji Koleksiyonu - NeoNick Pro";
     }
     
     document.title = pageTitle;
@@ -58,7 +58,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/nicknames" element={<Nicknames />} />
-          <Route path="/logos" element={<Logos />} />
+          <Route path="/emojis" element={<Emojis />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
